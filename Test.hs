@@ -27,7 +27,12 @@ freqlisttest3 =
                0
                (count (freqlist testtokens) "blah")
 
-main = runTestTT $ TestList [ngramstest, freqlisttest1, freqlisttest2, freqlisttest3]
+freqlisttest4 = 
+    TestCase $ assertEqual "Frequency List, total count"
+               (length testtokens)
+               (totalcount (freqlist testtokens))
+
+main = runTestTT $ TestList [ngramstest, freqlisttest1, freqlisttest2, freqlisttest3, freqlisttest4]
                            
                     
 
