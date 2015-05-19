@@ -2,6 +2,7 @@ module Test where
 
 import Test.HUnit
 import TextProcessors
+import TextStatistics
 
 teststring = ["to","be","or","not", "to", "be"]
 
