@@ -5,11 +5,12 @@ import TextProcessors
 
 teststring = ["to","be","or","not", "to", "be"]
 
-ngramstest :: Test
 ngramstest =
     TestCase $ assertEqual "Trigrams"
-               [["to","be","or"],["be","or","not"],["or","not","to"],["not to be"]] 
-               ngrams teststring
+               [["to","be","or"],["be","or","not"],["or","not","to"],["not","to","be"]] 
+               (ngrams 3 teststring)
+
+main = runTestTT ngramstest
                            
                     
 
