@@ -4,14 +4,30 @@ import Test.HUnit
 import TextProcessors
 import TextStatistics
 
-teststring = ["to","be","or","not", "to", "be"]
+testtokens = ["to","be","or","not", "to", "be"]
 
 ngramstest =
     TestCase $ assertEqual "Trigrams"
                [["to","be","or"],["be","or","not"],["or","not","to"],["not","to","be"]] 
-               (ngrams 3 teststring)
+               (ngrams 3 testtokens)
 
-main = runTestTT ngramstest
+
+freqlisttest1 = 
+    TestCase $ assertEqual "Frequency List, count of word 'be'"
+               2
+               (count (freqlist testtokens) "be")
+               
+freqlisttest2 = 
+    TestCase $ assertEqual "Frequency List, count of word 'or'"
+               1
+               (count (freqlist testtokens) "or")
+
+freqlisttest3 = 
+    TestCase $ assertEqual "Frequency List, count of absent word 'blah'"
+               0
+               (count (freqlist testtokens) "blah")
+
+main = runTestTT $ TestList [ngramstest, freqlisttest1, freqlisttest2, freqlisttest3]
                            
                     
 

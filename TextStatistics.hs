@@ -7,16 +7,16 @@ import Data.Maybe
 
 
 -- absolute count
-count :: (Eq a, Hashable a) => a -> HashMap.HashMap a Int -> Int
-count ngram freqlist = case value of Nothing -> 0
-                                     Just x  -> x
-                       where value = HashMap.lookup ngram freqlist
+count :: (Eq a, Hashable a) => HashMap.HashMap a Int -> a -> Int
+count freqlist token  = case value of Nothing -> 0
+                                      Just x  -> x
+                        where value = HashMap.lookup token freqlist
 
 -- relative frequency
-freq :: (Eq a, Hashable a) => a -> HashMap.HashMap a Int -> Double
-freq ngram freqlist = case value of Nothing -> 0.0
+freq :: (Eq a, Hashable a) => HashMap.HashMap a Int -> a -> Double
+freq freqlist token = case value of Nothing -> 0.0
                                     Just x  -> (fromIntegral x) / (fromIntegral total)
-                      where value = HashMap.lookup ngram freqlist
+                      where value = HashMap.lookup token freqlist
                             total = totalcount freqlist
 
 
@@ -25,10 +25,11 @@ totalcount freqlist = sum (HashMap.elems freqlist)
 
 freqlist :: (Eq a, Hashable a) => [a] -> HashMap.HashMap a Int 
 freqlist []         = HashMap.empty
-freqlist (token:xs) = HashMap.insert token ((count token $ freqlist xs) + 1) $ freqlist xs
+freqlist (token:xs) = HashMap.insert token ((count (freqlist xs) token) + 1) $ freqlist xs
 
 ngramfreqlist :: Int -> [String] -> HashMap.HashMap [String] Int
 ngramfreqlist n words = freqlist (ngrams n words)
+
 
 
 
