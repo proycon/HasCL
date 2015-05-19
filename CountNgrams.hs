@@ -8,10 +8,10 @@ import System.Environment
 
 
 
-countngrams :: String -> IO ()
-countngrams filename = do
+countngrams :: String -> Int -> IO ()
+countngrams filename n = do
     contents <- readFile filename
-    putStr $ printfreqlist (freqlist contents)
+    putStr $ printfreqlist (freqlist (ngrams n ((strip . (split " ")) contents)))
 
 main = do
     (filename:n:_) <- getArgs
