@@ -17,8 +17,10 @@ freq :: (Eq a, Hashable a) => HashMap.HashMap a Int -> a -> Double
 freq freqlist token = fromIntegral (count freqlist token) / fromIntegral (totalcount freqlist)
 
 -- total number of tokens
-totalcount :: HashMap.HashMap a Int -> Int
-totalcount freqlist = sum (HashMap.elems freqlist)
+--totalcount :: HashMap.HashMap a Int -> Int
+--totalcount freqlist = sum (HashMap.elems freqlist)
+totalcount :: (HashMap.HashMap a Int -> Int)
+totalcount = sum . HashMap.elems
 
 -- frequency list
 freqlist :: (Eq a, Hashable a) => [a] -> HashMap.HashMap a Int 
