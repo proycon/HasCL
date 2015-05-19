@@ -11,14 +11,10 @@ count :: (Eq a, Hashable a) => HashMap.HashMap a Int -> a -> Int
 count freqlist token  = case value of Nothing -> 0
                                       Just x  -> x
                         where value = HashMap.lookup token freqlist
-
+--
 -- relative frequency
 freq :: (Eq a, Hashable a) => HashMap.HashMap a Int -> a -> Double
-freq freqlist token = case value of Nothing -> 0.0
-                                    Just x  -> (fromIntegral x) / (fromIntegral total)
-                      where value = HashMap.lookup token freqlist
-                            total = totalcount freqlist
-
+freq freqlist token = fromIntegral (count freqlist token) / fromIntegral (totalcount freqlist)
 
 totalcount :: HashMap.HashMap a Int -> Int
 totalcount freqlist = sum (HashMap.elems freqlist)
