@@ -31,4 +31,6 @@ freqlist (token:xs) = HashMap.insert token ((count (freqlist xs) token) + 1) $ f
 ngramfreqlist :: Int -> [String] -> HashMap.HashMap [String] Int
 ngramfreqlist n words = freqlist (ngrams n words)
 
-
+-- print a frequency list
+printfreqlist :: (Eq a, Hashable a, Show a) => HashMap.HashMap a Int -> String
+printfreqlist freqlist = unlines [ show k ++ "\t" ++ show v | (k,v) <- HashMap.assocs freqlist ]
