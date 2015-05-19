@@ -1,4 +1,4 @@
-module TextStatistics (count,addcount,addcount1,totalcount,freqlist,ngramfreqlist) where
+module TextStatistics where
 
 import TextProcessors
 import qualified Data.HashMap.Lazy as HashMap
