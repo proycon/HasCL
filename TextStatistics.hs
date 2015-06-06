@@ -33,4 +33,4 @@ ngramfreqlist n words = freqlist (ngrams n words)
 
 -- show frequency list
 showfreqlist :: (Eq a, Hashable a, Show a) => HashMap.HashMap a Int -> String
-showfreqlist freqlist = unlines [ show k ++ "\t" ++ show v | (k,v) <- HashMap.assocs freqlist ]
+showfreqlist freqlist = unlines [ show k ++ "\t" ++ show v | (k,v) <- HashMap.toList freqlist ]
